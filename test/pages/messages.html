@@ -1,0 +1,7 @@
+<input>
+<script>
+
+document.querySelector("input").addEventListener("focus", () => console.log("input-onFocus"), false);
+document.querySelector("input").addEventListener("keypress", ({ keyCode }) => console.log("input-onKeypress", { keyCode }), false);
+
+</script>
