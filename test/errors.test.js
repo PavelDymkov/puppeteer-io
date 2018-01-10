@@ -47,3 +47,18 @@ test(`error catched by RegExp`, done => {
         }
     });
 });
+
+test(`full message text received`, done => {
+    io({
+        page, done,
+        async input() {
+            await page.click("button");
+        },
+        async output({ error }) {
+            let errorMessage = await error("button error message");
+            let isCorrectMessage = /TypeError: button error message\s+at HTMLButtonElement/.test(errorMessage);
+
+            expect(isCorrectMessage).toBeTruthy();
+        }
+    });
+});

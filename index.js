@@ -111,7 +111,7 @@ function errorOrigin(pattern) {
     return new Promise(resolve => {
         this.errorHandler = error => {
             if (pattern.test(error)) {
-                resolve();
+                resolve(error);
             }
         };
     });
