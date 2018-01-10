@@ -11,8 +11,8 @@
     "type": "git",
     "url": "git+https://github.com/PavelDymkov/puppeteer-io.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["puppeteer", "library"],
+  "author": "Pavel Dymkov <dymkov86@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PavelDymkov/puppeteer-io/issues"
