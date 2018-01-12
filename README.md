@@ -214,6 +214,9 @@ The stream of receiving messages from the browser.This function provide an objec
 
   * ```message(id: <String>): <Promise>```
   A promise will be resolved when ```console.log(id)``` is called in the browser.
-  * ```dataFromMessage(id: <String>): <Promise<JSONValue>>``` 
+  
+  * ```dataFromMessage(id: <String>): <Promise<JSONValue>>```
+  Promise returns an object passed from the browser by ```console.log(id, data)```. You can only pass the serializable data ([more](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#jshandlejsonvalue)).
+  
   * ```error(pattern: <String|RegExp>): <Promise<String>>``` 
-
+  Promise returns ```error.message``` if the message matches the pattern.
