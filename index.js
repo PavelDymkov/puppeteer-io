@@ -27,7 +27,7 @@ function io(settings) {
     page.on("console", logsListener);
     page.on("pageerror", errorsListener);
 
-    Promise.all([
+    return Promise.all([
         new Promise(async resolve => {
             if (typeof input == "function") {
                 await input();
