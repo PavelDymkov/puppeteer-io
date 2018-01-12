@@ -30,9 +30,7 @@ function io(settings) {
     Promise.all([
         new Promise(async resolve => {
             if (typeof input == "function") {
-                const load = loadOrigin.bind(null, page);
-
-                await input({ load });
+                await input();
             }
 
             resolve();
@@ -98,18 +96,6 @@ function dataFromMessageOrigin(message) {
 
             resolve(await dataSource.jsonValue());
         }
-    });
-}
-
-function loadOrigin(page, url) {
-    return new Promise(resolve => {
-        page.on("load", function loadHandler() {
-            page.removeListener("load", loadHandler);
-
-            resolve();
-        });
-
-        page.goto(url);
     });
 }
 
