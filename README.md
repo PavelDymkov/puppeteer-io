@@ -1,9 +1,6 @@
 # Puppeteer-IO
 
 
-> Library for tests with Puppeteer using Jest or Mocha
-
-
 **Puppeteer-IO** is a library for [Puppeteer](https://github.com/GoogleChrome/puppeteer) that parallelizes code execution into two streams: the command input stream to the browser and the stream of receiving messages from the browser.
 **Puppeteer-IO** was created for writing tests, when it is necessary to check whether some code was called.
 For this purpose, use the ```console.log``` call to retrieve messages from the browser.
@@ -23,7 +20,7 @@ npm i puppeteer-io
 ### React-component testing example
 
 
-Let's look at testing the React-component using the Jest framework. The source code of the React-component:
+Let's look at testing the React-component using [Jest](https://facebook.github.io/jest/). The source code of the React-component:
 
 
 ```javascript
@@ -64,7 +61,7 @@ export default class Select extends React.Component {
 ```
 
 
-Now write a page that will open in the browser to test the component.
+Now create a page that will open in the browser to test the component.
 
 
 ```javascript
@@ -86,14 +83,14 @@ function TestPage() {
     
     return <div>
        <Select items={testItems} onChange={onChange} />
-   </div>
+    </div>
 }
 
 ReactDOM.render(<TestPage />, document.getElementById("application"));
 ```
 
 
-And the test code.
+And the test case.
 
 
 ```javascript
@@ -204,13 +201,13 @@ test(`message received`, done => {
 The [page](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#class-page) in which the code is executed.
 
 * ```done``` <[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function)>
-Test framework callback
+A callback that is called when both streams are executed.
 
 * ```input()``` <[async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)>
 The command input stream to the browser
 
 * ```output(api)``` <[async Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)>
-The stream of receiving messages from the browser.This function provide an object contains methods:
+The stream of receiving messages from the browser. This function provide an object contains methods:
 
   * ```message(id: <String>): <Promise>```
   A promise will be resolved when ```console.log(id)``` is called in the browser.
