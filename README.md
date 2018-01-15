@@ -97,12 +97,12 @@ And the test case.
 const puppeteer = require("puppeteer");
 const io = require("puppeteer-io");
 
-test(`check that id is sent to onChange callback`, async done => {
+test(`check that id is sent to onChange callback`, async () => {
     let browser = await puppeteer.launch();
     let page = await browser.newPage();
     
     await io({
-        page, done,
+        page,
         async input() {
             // It is important to call goto in input stream
             // if you await output data before page load
