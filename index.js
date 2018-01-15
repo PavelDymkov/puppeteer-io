@@ -50,7 +50,7 @@ function io(settings) {
         page.removeListener("console", logsListener);
         page.removeListener("pageerror", errorsListener);
 
-        done();
+        if (typeof done == "function") done();
     });
 }
 

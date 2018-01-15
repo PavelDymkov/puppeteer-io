@@ -1,7 +1,7 @@
 {
   "name": "puppeteer-io",
-  "version": "0.7.0",
-  "description": "",
+  "version": "0.7.1",
+  "description": "Library for tests with Puppeteer using Jest or Mocha",
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run test",
