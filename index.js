@@ -54,7 +54,9 @@ function io(settings) {
     });
 }
 
-function logsListenerOrigin({ type, args }) {
+function logsListenerOrigin(message) {
+    let type = message.type(), args = message.args();
+
     if (type == "log" && this.logHandler) this.logHandler(...args);
 }
 

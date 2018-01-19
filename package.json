@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-io",
-  "version": "0.7.3",
+  "version": "1.0.0",
   "description": "Library for tests with Puppeteer using Jest or Mocha",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/PavelDymkov/puppeteer-io.git"
   },
-  "keywords": ["puppeteer", "library"],
+  "keywords": [
+    "puppeteer",
+    "library"
+  ],
   "author": "Pavel Dymkov <dymkov86@gmail.com>",
   "license": "ISC",
   "bugs": {
@@ -19,7 +22,7 @@
   },
   "homepage": "https://github.com/PavelDymkov/puppeteer-io#readme",
   "devDependencies": {
-    "jest": "^22.0.5",
-    "puppeteer": "^0.13.0"
+    "jest": "^22.1.3",
+    "puppeteer": "^1.0.0"
   }
 }

@@ -1,9 +1,8 @@
 const puppeteer = require("puppeteer");
 const io = require("../index.js");
-const { getTestPageUrl } = require("./lib.js");
 
 
-const url = getTestPageUrl(__filename);
+const url = `file://${__dirname}/pages/messages.html`;
 const ENTER_KEY = 13;
 let browser, page;
 
