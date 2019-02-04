@@ -71,3 +71,27 @@ test(`complex test`, done => {
         }
     });
 });
+
+test(`message spam test`, done => {
+    let lim = 9;
+
+    io({
+        page, done,
+        async input() {
+            let executionContext = await page.mainFrame().executionContext();
+
+            await executionContext.evaluate(lim => {
+                for (let i = 0; i < lim; i++) {
+                    console.log(`message ${i}`);
+                }
+
+                return Promise.resolve();
+            }, lim);
+        },
+        async output({ message }) {
+            for (let i = 0; i < lim; i++) {
+                await message(`message ${i}`);
+            }
+        }
+    });
+});

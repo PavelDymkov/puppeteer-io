@@ -20,7 +20,7 @@ function io(settings) {
     isAsyncFunction(input, "input");
     isAsyncFunction(output, "output");
 
-    let instance = {};
+    let instance = { messageStack: [] };
     let logsListener = logsListenerOrigin.bind(instance);
     let errorsListener = errorsListenerOrigin.bind(instance);
 
@@ -55,9 +55,18 @@ function io(settings) {
 }
 
 function logsListenerOrigin(message) {
-    let type = message.type(), args = message.args();
+    if (message.type() == "log") addMessageToStack(this, message);
+}
 
-    if (type == "log" && this.logHandler) this.logHandler(...args);
+async function addMessageToStack(instance, source) {
+    let [messageSource, dataSource] = source.args();
+
+    let text = messageSource ? await messageSource.jsonValue() : null;
+    let data = dataSource ? await dataSource.jsonValue() : null;
+
+    instance.messageStack.push({ text, data });
+
+    instance.logHandler && instance.logHandler();
 }
 
 function errorsListenerOrigin({ message }) {
@@ -69,16 +78,21 @@ function messageOrigin(message) {
         throw new Error(`message not a string`);
 
     return new Promise(resolve => {
-        this.logHandler = async messageSource => {
-            if (!messageSource) return;
+        this.logHandler = () => {
+            for (let i = 0, lim = this.messageStack.length; i < lim; i++) {
+                let { text } = this.messageStack[i];
 
-            let text = await messageSource.jsonValue();
+                if (text === message) {
+                    this.messageStack = this.messageStack.slice(i + 1);
 
-            if (text === message) {
-                delete this.logHandler;
-                resolve();
+                    delete this.logHandler;
+
+                    return void resolve();
+                }
             }
         }
+
+        if (this.messageStack.length > 0) this.logHandler();
     });
 }
 
@@ -87,17 +101,21 @@ function dataFromMessageOrigin(message) {
         throw new Error(`message not a string`);
 
     return new Promise(resolve => {
-        this.logHandler = async (messageSource, dataSource) => {
-            if (!messageSource && !dataSource) return;
+        this.logHandler = () => {
+            for (let i = 0, lim = this.messageStack.length; i < lim; i++) {
+                let { text, data } = this.messageStack[i];
 
-            let text = await messageSource.jsonValue();
+                if (text === message) {
+                    this.messageStack = this.messageStack.slice(i + 1);
 
-            if (text !== message) return;
+                    delete this.logHandler;
 
-            delete this.logHandler;
-
-            resolve(await dataSource.jsonValue());
+                    return void resolve(data);
+                }
+            }
         }
+
+        if (this.messageStack.length > 0) this.logHandler();
     });
 }
 
