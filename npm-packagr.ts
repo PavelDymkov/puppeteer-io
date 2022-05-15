@@ -26,7 +26,7 @@ npmPackagr({
 
         puppeteerVersionBadge(),
 
-        // version("patch"),
+        version("patch"),
 
         packageJSON((packageJson) => {
             delete packageJson.devDependencies;
