@@ -1,28 +1,38 @@
 {
-  "name": "puppeteer-io",
-  "version": "1.12.0",
-  "description": "Library for tests with Puppeteer using Jest or Mocha",
-  "main": "index.js",
-  "scripts": {
-    "prepublish": "npm run test",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PavelDymkov/puppeteer-io.git"
-  },
-  "keywords": [
-    "puppeteer",
-    "library"
-  ],
-  "author": "Pavel Dymkov <dymkov86@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PavelDymkov/puppeteer-io/issues"
-  },
-  "homepage": "https://github.com/PavelDymkov/puppeteer-io#readme",
-  "devDependencies": {
-    "jest": "^24.0.0",
-    "puppeteer": "^1.12.1"
-  }
+    "name": "puppeteer-io",
+    "version": "2.0.0",
+    "description": "Library for tests with Puppeteer using Jest or Mocha",
+    "main": "index.js",
+    "scripts": {
+        "prepublishOnly": "exit 1",
+        "pub": "packagr",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PavelDymkov/puppeteer-io.git"
+    },
+    "keywords": [
+        "puppeteer",
+        "library"
+    ],
+    "author": "Pavel Dymkov <dymkov86@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/PavelDymkov/puppeteer-io/issues"
+    },
+    "homepage": "https://github.com/PavelDymkov/puppeteer-io#readme",
+    "dependencies": {
+        "logical-not": "^1.0.9"
+    },
+    "peerDependencies": {
+        "puppeteer": "*"
+    },
+    "devDependencies": {
+        "@types/node": "17.0.33",
+        "jest": "^28.1.0",
+        "npm-packagr": "^1.0.39",
+        "puppeteer": "^14.1.0",
+        "typescript": "4.6.4"
+    }
 }

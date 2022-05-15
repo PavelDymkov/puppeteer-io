@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer");
-const io = require("../index.js");
-
+const io = require("../package/index.js");
 
 const url = `file://${__dirname}/pages/messages.html`;
 const ENTER_KEY = 13;
@@ -24,63 +23,67 @@ afterAll(async () => {
     await browser.close();
 });
 
-test(`message received`, done => {
+test(`message received`, (done) => {
     io({
-        page, done,
+        page,
+        done,
         async input() {
             await page.focus("input");
         },
         async output({ message }) {
             await message("input-onFocus");
-        }
+        },
     });
 });
 
-test(`data from message received`, done => {
+test(`data from message received`, (done) => {
     io({
-        page, done,
+        page,
+        done,
         async input() {
             let input = await page.$("input");
 
             await input.focus();
             await input.press("Enter");
         },
-        async output({ dataFromMessage }) {
-            let { keyCode } = await dataFromMessage("input-onKeypress");
+        async output({ message }) {
+            let { keyCode } = await message("input-onKeypress");
 
             expect(keyCode).toBe(ENTER_KEY);
-        }
+        },
     });
 });
 
-test(`complex test`, done => {
+test(`complex test`, (done) => {
     io({
-        page, done,
+        page,
+        done,
         async input() {
             let input = await page.$("input");
 
             await input.focus();
             await input.press("Enter");
         },
-        async output({ message, dataFromMessage }) {
+        async output({ message }) {
             await message("input-onFocus");
 
-            let { keyCode } = await dataFromMessage("input-onKeypress");
+            let { keyCode } = await message("input-onKeypress");
 
             expect(keyCode).toBe(ENTER_KEY);
-        }
+        },
     });
 });
 
-test(`message spam test`, done => {
+test(`message spam test`, (done) => {
     let lim = 9;
 
     io({
-        page, done,
+        page,
+        done,
         async input() {
             let executionContext = await page.mainFrame().executionContext();
 
-            await executionContext.evaluate(lim => {
+            await executionContext.evaluate((lim) => {
                 for (let i = 0; i < lim; i++) {
                     console.log(`message ${i}`);
                 }
@@ -92,6 +95,6 @@ test(`message spam test`, done => {
             for (let i = 0; i < lim; i++) {
                 await message(`message ${i}`);
             }
-        }
+        },
     });
 });

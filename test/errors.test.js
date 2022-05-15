@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
-const io = require("../index.js");
 
+const io = require("../package/index.js");
 
 const url = `file://${__dirname}/pages/errors.html`;
 let browser, page;
@@ -23,41 +23,47 @@ afterAll(async () => {
     await browser.close();
 });
 
-test(`error catched`, done => {
+test(`error catched`, (done) => {
     io({
-        page, done,
+        page,
+        done,
         async input() {
             await page.click("button");
         },
         async output({ error }) {
             await error("button error message");
-        }
+        },
     });
 });
 
-test(`error catched by RegExp`, done => {
+test(`error catched by RegExp`, (done) => {
     io({
-        page, done,
+        page,
+        done,
         async input() {
             await page.click("button");
         },
         async output({ error }) {
             await error(/TypeError:/);
-        }
+        },
     });
 });
 
-test(`full message text received`, done => {
+test(`full message text received`, (done) => {
     io({
-        page, done,
+        page,
+        done,
         async input() {
             await page.click("button");
         },
         async output({ error }) {
             let errorMessage = await error("button error message");
-            let isCorrectMessage = /TypeError: button error message\s+at HTMLButtonElement/.test(errorMessage);
+            let isCorrectMessage =
+                /TypeError: button error message\s+at HTMLButtonElement/.test(
+                    errorMessage,
+                );
 
             expect(isCorrectMessage).toBeTruthy();
-        }
+        },
     });
 });

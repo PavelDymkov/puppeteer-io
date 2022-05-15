@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "noUncheckedIndexedAccess": true,
+        "outDir": "package",
+        "strict": true,
+        "target": "ES2020"
+    },
+    "include": ["src/**/*.ts"]
+}
