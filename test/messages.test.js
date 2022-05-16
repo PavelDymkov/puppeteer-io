@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
-const io = require("../package/index.js");
+
+const io = require("../package");
 
 const url = `file://${__dirname}/pages/messages.html`;
 const ENTER_KEY = 13;
