@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-const io = require("../package");
+const io = require("../package/io.js");
 
 const url = `file://${__dirname}/pages/errors.html`;
 let browser, page;
