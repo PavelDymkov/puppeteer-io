@@ -31,6 +31,8 @@ npmPackagr({
         packageJSON((packageJson) => {
             delete packageJson.devDependencies;
             delete packageJson.scripts;
+
+            packageJson.main = "io.js";
         }),
 
         git("commit", "puppeteer-io"),
